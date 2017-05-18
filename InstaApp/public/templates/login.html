@@ -1,0 +1,36 @@
+<form class="form" name="loginForm"
+      ng-submit="loginUser()" novalidate id="login-form">
+    <div class="heading">Login to Insta App</div>
+    <div class="left">
+        <label for="email">Email</label> <br />
+        <input type="email" name="email" id="email" placeholder="Enter Email Address"
+               ng-model="loginDetails.email" required> <span
+               ng-show="loginForm.email.$invalid && !loginForm.email.$pristine"
+               aria-hidden="true"></span> <span
+               ng-show="(loginForm.email.$invalid ||
+                                           loginForm.email.$error.required) &&
+                                           !loginForm.email.$pristine"
+               class="help-block">Enter Email Address.</span> <br />
+        <label for="password">Password</label> <br />
+        <input type="password" name="password" id="pass" placeholder="Enter Password"
+               ng-model="loginDetails.password" ng-minlength="8" required>
+        <span
+            ng-show="loginForm.password.$error.required && !loginForm.password.$pristine"
+            class="help-block"> Password is required.</span> <span
+            ng-show="loginForm.password.$error.minlength"
+            class="help-block">Password is too short.</span> <br />
+        <input type="submit" ng-disabled="loginForm.$invalid" value="Login" />
+        <p class="login-message">Not Registered?
+            <a href="" ng-click="registerFlag = true">Create an Account</a></p>
+
+        <p class="login-message">Forget?
+            <a href="" ng-click="password()">Forget Password</a></p>
+    </div>
+    <div class="right">
+        <div class="connect">Connect with</div>
+        <a href="" class="facebook">
+            <span class="fontawesome-facebook"></span>
+        </a> <br />
+        
+    </div>
+</form>  

@@ -16,9 +16,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Ajaykumar Prathap">
         <meta name="Description" content="Instagram application used to post and share the photos">
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
         </head>
-        <body>
 
+        <body>
+        <div class="navbar navbar-default navbar-static-top">
+          <div class="container">
+         <ul class="nav navbar-nav">
+        <a href="/" class="navbar-brand"><i class="ion-images"></i> Instagram</a>
+        <li><a ui-sref="#/">Home</a></li>
+        <li><a ui-sref="login">Log in</a></li>
+        <li><a ui-sref="signup">Sign up</a></li>
+        <li><a ng-click="logout()" href="">Logout</a></li>
+    </ul>
+  </div>
+</div>
         <div ui-view></div>
         
         <script type="text/javascript" src="vendor/angular.min.js"></script>
@@ -26,5 +39,8 @@
         <script src="vendor/ui-bootstrap-tpls-2.1.4.min.js"></script>
         <script type="text/javascript" src="vendor/satellizer.min.js"></script>
         <script type="text/javascript" src="index.module.js"></script>
+        <!-- Loading controllers -->
+         <script type="text/javascript" src="controllers/logincontroller.js"></script>
+         <script type="text/javascript" src="controllers/signupcontroller.js"></script>
     </body>
 </html>
