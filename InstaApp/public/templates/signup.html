@@ -4,7 +4,7 @@
     <div class="left">
 
         <input type="email" name="email" id="email" placeholder="Enter Email Address"
-               ng-model="loginDetails.email" required> <span
+               ng-model="email" required> <span
                ng-show="registerForm.email.$invalid && !registerForm.email.$pristine"
                aria-hidden="true"></span> <span
                ng-show="(registerForm.email.$invalid ||
@@ -13,7 +13,7 @@
                class="help-block">Enter Email Address.</span> <br />
 
         <input type="password" name="password" id="pass" placeholder="Enter Password"
-               ng-model="loginDetails.password" ng-minlength="8" required>
+               ng-model="password" ng-minlength="8" required>
         <span
             ng-show="registerForm.password.$error.required && !registerForm.password.$pristine"
             class="help-block"> Password is required.</span> <span

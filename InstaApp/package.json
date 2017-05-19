@@ -10,9 +10,15 @@
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
-    "jade": "~1.11.0",
     "morgan": "^1.8.1",
     "path": "^0.12.7",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "bcryptjs": "^2.0.2",
+    "body-parser": "^1.8.1",
+    "cors": "^2.4.2",
+    "jwt-simple": "^0.2.0",
+    "moment": "^2.8.3",
+    "mongoose": "^3.8.17",
+    "request": "^2.44.0"
   }
 }
