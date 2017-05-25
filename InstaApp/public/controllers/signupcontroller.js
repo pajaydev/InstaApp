@@ -1,6 +1,6 @@
-instaApp.controller('SignupController',function($scope){
+instaApp.controller('SignupController',function($scope,$auth){
      
-      $scope.registerUser = function() {
+   $scope.registerUser = function() {
       var user = {
         email: $scope.email,
         password: $scope.password
