@@ -1,9 +1,10 @@
-var express = require('express');
-var bcrypt = require('bcryptjs');
-var moment = require('moment');
-var User = require('../models/user.model');
-var router = express.Router();
-/* Post method to  sign in with Email */
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const moment = require('moment');
+const User = require('../models/user.model');
+let router = express.Router();
+
+/* Post method to  login in with Email */
 
 router.post('/login', function(req, res) {
   User.findOne({ email: req.body.email }, '+password', function(err, user) {
@@ -27,6 +28,7 @@ router.post('/login', function(req, res) {
 
 
 /* post method to sign up new user */
+
 router.post('/signup', function(req, res) {
   console.log("Sign up method");
   User.findOne({ email: req.body.email }, function(err, existingUser) {
@@ -49,6 +51,89 @@ router.post('/signup', function(req, res) {
         });
       });
     });
+  });
+});
+
+// Authentication using Instagram account and handling some scenarios
+
+app.post('/insta', function(req, res) {
+  var accessTokenUrl = 'https://api.instagram.com/oauth/access_token';
+
+  var params = {
+    client_id: req.body.clientId,
+    redirect_uri: req.body.redirectUri,
+    client_secret: config.clientSecret,
+    code: req.body.code,
+    grant_type: 'authorization_code'
+  };
+
+  // Exchange authorization code for access token.
+  request.post({ url: accessTokenUrl, form: params, json: true }, function(error, response, body) {
+
+    // Link user accounts.
+    if (req.headers.authorization) {
+
+      User.findOne({ instagramId: body.user.id }, function(err, existingUser) {
+
+        var token = req.headers.authorization.split(' ')[1];
+        var payload = jwt.decode(token, config.tokenSecret);
+
+        User.findById(payload.sub, '+password', function(err, localUser) {
+          if (!localUser) {
+            return res.status(400).send({ message: 'User not found.' });
+          }
+
+          // Merge two accounts. Instagram account takes precedence. Email account is deleted.
+          if (existingUser) {
+
+            existingUser.email = localUser.email;
+            existingUser.password = localUser.password;
+
+            localUser.remove();
+
+            existingUser.save(function() {
+              var token = createToken(existingUser);
+              return res.send({ token: token, user: existingUser });
+            });
+
+          } else {
+            // Link current email account with the Instagram profile information.
+            localUser.instagramId = body.user.id;
+            localUser.username = body.user.username;
+            localUser.fullName = body.user.full_name;
+            localUser.picture = body.user.profile_picture;
+            localUser.accessToken = body.access_token;
+
+            localUser.save(function() {
+              var token = createToken(localUser);
+              res.send({ token: token, user: localUser });
+            });
+
+          }
+        });
+      });
+    } else {
+      //Create a new user account or return an existing one.
+      User.findOne({ instagramId: body.user.id }, function(err, existingUser) {
+        if (existingUser) {
+          var token = createToken(existingUser);
+          return res.send({ token: token, user: existingUser });
+        }
+
+        var user = new User({
+          instagramId: body.user.id,
+          username: body.user.username,
+          fullName: body.user.full_name,
+          picture: body.user.profile_picture,
+          accessToken: body.access_token
+        });
+
+        user.save(function() {
+          var token = createToken(user);
+          res.send({ token: token, user: user });
+        });
+      });
+    }
   });
 });
 

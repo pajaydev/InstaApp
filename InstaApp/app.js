@@ -1,16 +1,16 @@
 /* Main file to load backend files(Express and Mongo)*/
 
-var bcrypt = require('bcryptjs');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var express = require('express');
-var jwt = require('jwt-simple');
-var moment = require('moment');
-var mongoose = require('mongoose');
-var path = require('path');
-var request = require('request');
-var config = require('./config');
-var app = express();
+const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
+const jwt = require('jwt-simple');
+const moment = require('moment');
+const mongoose = require('mongoose');
+const path = require('path');
+const request = require('request');
+const config = require('./config');
+const app = express();
 
 //connect to DB
 //connecting to Mongoose db
