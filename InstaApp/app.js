@@ -36,6 +36,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./routes/user.route');
 app.use('/auth', routes);
 
+//including routes for Insta(feed,likes,media)
+var routes = require('./routes/insta.route');
+app.use('/insta', routes);
+
 
 
 app.listen(app.get('port'), function() {

@@ -25,3 +25,23 @@ router.get('/api/media/:id', isAuthenticated, function(req, res, next) {
     }
   });
 });
+
+
+// liking the post (media) after user authentication
+router.post('/api/like', isAuthenticated, function(req, res, next) {
+  var mediaId = req.body.mediaId;
+  var accessToken = { access_token: req.user.accessToken };
+  var likeUrl = 'https://api.instagram.com/v1/media/' + mediaId + '/likes';
+
+  request.post({ url: likeUrl, form: accessToken, json: true }, function(error, response, body) {
+    if (response.statusCode !== 200) {
+      return res.status(response.statusCode).send({
+        code: response.statusCode,
+        message: body.meta.error_message
+      });
+    }
+    res.status(200).end();
+  });
+});
+
+module.exports = router;
