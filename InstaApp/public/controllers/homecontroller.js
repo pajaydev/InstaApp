@@ -1,4 +1,5 @@
-instaApp.controller("HomeController", function($scope, $window, $rootScope, $auth) {
+instaApp.controller("HomeController", function($scope, $window, $rootScope, 
+    $auth,InstaFeed,$state) {
 
     //to check user is logged in or not
     $scope.isAuthenticated = function() {
@@ -7,8 +8,9 @@ instaApp.controller("HomeController", function($scope, $window, $rootScope, $aut
     
     //to check user is authentication on page reload
     if ($auth.isAuthenticated() && ($rootScope.currentUser && $rootScope.currentUser.username)) {
-        API.getFeed().success(function(data) {
+        InstaFeed.getFeed().success(function(data) {
             $scope.photos = data;
+            $state.go('home');
         });
     }
 
@@ -18,6 +20,7 @@ instaApp.controller("HomeController", function($scope, $window, $rootScope, $aut
             .then(function(response) {
                 $window.localStorage.currentUser = JSON.stringify(response.data.user);
                 $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+                $state.go('home');
             });
     };
 

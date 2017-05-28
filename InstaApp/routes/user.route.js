@@ -1,6 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const moment = require('moment');
+const jwt = require('jwt-simple');
+const config = require('../config');
+const request = require('request');
 const User = require('../models/user.model');
 let router = express.Router();
 
@@ -56,7 +59,7 @@ router.post('/signup', function(req, res) {
 
 // Authentication using Instagram account and handling some scenarios
 
-app.post('/insta', function(req, res) {
+router.post('/instagram', function(req, res) {
   var accessTokenUrl = 'https://api.instagram.com/oauth/access_token';
 
   var params = {

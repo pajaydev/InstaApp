@@ -1,4 +1,4 @@
-instaApp.controller('SignupController',function($scope,$auth){
+instaApp.controller('SignupController',function($scope,$auth,$state){
      
    $scope.registerUser = function() {
       var user = {
@@ -8,6 +8,9 @@ instaApp.controller('SignupController',function($scope,$auth){
 
       // Satellizer
       $auth.signup(user)
+        .then(function(response){
+           $state.go('home');
+        })
         .catch(function(response) {
           console.log(response.data);
         });

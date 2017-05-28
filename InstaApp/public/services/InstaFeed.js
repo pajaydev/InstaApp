@@ -5,15 +5,15 @@
     return {
       //get feed
       getFeed: function() {
-        return $http.get('http://localhost:3000/api/feed');
+        return $http.get('http://localhost:3000/insta/feed');
       },
       //get media by id
       getMediaById: function(id) {
-        return $http.get('http://localhost:3000/api/media/' + id);
+        return $http.get('http://localhost:3000/insta/media/' + id);
       },
       //like the media
       likeMedia: function(id) {
-        return $http.post('http://localhost:3000/api/like', { mediaId: id });
+        return $http.post('http://localhost:3000/insta/like', { mediaId: id });
       }
     }
 

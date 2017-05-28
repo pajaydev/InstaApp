@@ -40,7 +40,7 @@ instaApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     authorizationEndpoint: 'https://api.instagram.com/oauth/authorize'
   })
   // authenticate user on browser refresh
-  .run(function($rootScope, $window, $auth) {
+  instaApp.run(function($rootScope, $window, $auth) {
   if ($auth.isAuthenticated()) {
     $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
   }

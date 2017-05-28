@@ -33,12 +33,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //including Routes for user
-var routes = require('./routes/user.route');
-app.use('/auth', routes);
+let userRoute = require('./routes/user.route');
+app.use('/auth', userRoute);
 
 //including routes for Insta(feed,likes,media)
-var routes = require('./routes/insta.route');
-app.use('/insta', routes);
+var instaRoute = require('./routes/insta.route');
+app.use('/insta', instaRoute);
 
 
 

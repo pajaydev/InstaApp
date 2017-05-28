@@ -1,4 +1,4 @@
-instaApp.controller('LoginController',function($scope,$window, $location, $rootScope, $auth){
+instaApp.controller('LoginController',function($scope,$window, $location, $rootScope, $auth,$state){
 $scope.instagramLogin = function() {
       $auth.authenticate('instagram')
         .then(function(response) {
@@ -10,11 +10,12 @@ $scope.instagramLogin = function() {
         });
     };
 
-    $scope.emailLogin = function() {
+    $scope.loginUser = function() {
       $auth.login({ email: $scope.email, password: $scope.password })
         .then(function(response) {
           $window.localStorage.currentUser = JSON.stringify(response.data.user);
           $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+          $state.go('home');
         })
         .catch(function(response) {
           $scope.errorMessage = {};
