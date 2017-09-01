@@ -20,4 +20,12 @@ Make sure Node and Mongo Db is installed in your system
 
 7. go to browser type http://localhost:3000
    
+   
+# Login Page
+
+![Login Page](https://github.com/ajay2507/InstaApp/blob/master/insta2.png)
+
+# Home page
+
+![Home Page](https://github.com/ajay2507/InstaApp/blob/master/insta3.png)
 
